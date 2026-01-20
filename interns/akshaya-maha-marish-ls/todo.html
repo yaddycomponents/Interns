@@ -6,7 +6,7 @@
     <title>Project 1: Todo CRUD App</title>
     <style>
       :root {
-        /* Color Palette */ 
+        /* Color Palette */
         --color-primary: #667eea;
         --color-primary-dark: #5568d3;
         --color-secondary: #764ba2;
@@ -225,6 +225,16 @@
         background: var(--color-danger-dark);
       }
 
+      .edit-btn{
+        padding: 8px var(--spacing-sm);
+        font-size: var(--font-size-sm);
+        background: var(--color-primary);
+      }
+
+      .edit-btn:hover{
+        background: var(--color-primary-dark);
+      }
+
       .empty-state {
         text-align: center;
         padding: var(--spacing-xl);
@@ -284,9 +294,9 @@
       </form>
 
       <div class="filter-buttons">
-        <button class="filter-btn all" data-filter="all">All</button>
-        <button class="filter-btn active" data-filter="active">Active</button>
-        <button class="filter-btn completed" data-filter="completed">Completed</button>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
       </div>
 
       <!-- <div class="filter-buttons">
@@ -303,6 +313,6 @@
         <!-- Todos will be rendered here by JavaScript -->
       </ul>
     </div>
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
   </body>
 </html>
