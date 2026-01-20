@@ -4,6 +4,7 @@
   "description": "Intern projects showcase",
   "scripts": {
     "build": "node scripts/build.js",
-    "build:intern": "node scripts/build-intern.js"
+    "serve": "npx serve public",
+    "dev": "npm run build && npm run serve"
   }
 }
