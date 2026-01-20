@@ -1,6 +1,5 @@
 let todos = [];
 let filter = "all";
-
 // DOM Elements
 const todoForm = document.getElementById("todo-form");
 const todoInput = document.getElementById("todo-input");
