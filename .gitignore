@@ -6,3 +6,4 @@ public/
 
 # OS
 .DS_Store
+.vercel
