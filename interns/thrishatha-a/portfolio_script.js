@@ -55,14 +55,22 @@ function showStack(type) {
         problem: ["Data Structures", "Algorithms", "Debugging", "Logic Building"]
     };
 
+    if (box.classList.contains("show") && box.dataset.active === type) {
+        box.classList.remove("show");
+        box.dataset.active = "";
+        return;
+    }
+
     content.innerHTML = data[type]
         .map(skill => `<div class="stack-tag">${skill}</div>`)
         .join("");
 
     box.classList.add("show");
+    box.dataset.active = type;
 
     box.scrollIntoView({ behavior: "smooth", block: "center" });
 }
+
 
 function showProject(type) {
     const box = document.getElementById("projectBox");
@@ -71,20 +79,26 @@ function showProject(type) {
     const data = {
         dt: {
             title: "Digital Twin based Seizure Prediction",
-            desc: "Personalised Digital Twin based Seizure Prediction system, which uses the EEG data from CHB-MIT dataset, creates digital twin, and applies federated learning and differential privacy to it, to predict the seizure intervals.",           
+            desc: "Personalised Digital Twin based Seizure Prediction system, which uses the EEG data from CHB-MIT dataset, creates digital twin, and applies federated learning and differential privacy to it, to predict the seizure intervals.",
             stack: ["Python", "Machine Learning", "XAI"]
         },
         Blockchain: {
             title: "Blockchain based Product Authentication System",
-            desc: "A Product Authentication System which makes use of Ethereum blockchain and Solidity contracts, to register the maufacturers, add products and verify the products, in a simulated blockchain environment.",            
+            desc: "A Product Authentication System which makes use of Ethereum blockchain and Solidity contracts, to register the maufacturers, add products and verify the products, in a simulated blockchain environment.",
             stack: ["Ethereum blockchain", "Solidity", "Truffle framework", "Ganache", "Metamask"]
         },
         Turret: {
             title: "Automated Gun turret System",
-            desc: "An Automated Gun Turret System, which makes use of Arduino board to collect the coordinates of enemy, and shoots the target based on the YOLOv8 model which was trained with the help of Roboflow and openCV.",            
+            desc: "An Automated Gun Turret System, which makes use of Arduino board to collect the coordinates of enemy, and shoots the target based on the YOLOv8 model which was trained with the help of Roboflow and openCV.",
             stack: ["Arduino", "Roboflow", "YOLOv8", "openCV"]
         }
     };
+
+    if (box.classList.contains("show") && box.dataset.active === type) {
+        box.classList.remove("show");
+        box.dataset.active = "";
+        return;
+    }
 
     const p = data[type];
 
@@ -97,6 +111,8 @@ function showProject(type) {
     `;
 
     box.classList.add("show");
+    box.dataset.active = type;
+
     box.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 

@@ -25,7 +25,7 @@ nav {
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    height:80px;
+    height: 80px;
 }
 
 nav a {
@@ -91,6 +91,13 @@ nav a {
     font-size: 32px;
     margin: 10px 0;
     color: #38bdf8;
+    min-height: 40px;   
+}
+
+.typing {
+    display: inline-block;
+    min-width: 260px;   
+    white-space: nowrap;
 }
 
 .hero-left p {
@@ -102,7 +109,7 @@ nav a {
 .hero-buttons {
     margin-top: 30px;
     display: flex;
-    gap: 20px; 
+    gap: 20px;
 }
 
 .hero-buttons button,
@@ -137,7 +144,7 @@ nav a {
 .about {
     min-height: 100vh;
     padding: 120px 80px;
-     background: linear-gradient(135deg, #020617, #0f172a);
+    background: linear-gradient(135deg, #020617, #0f172a);
 }
 
 .about h1 {
@@ -177,7 +184,7 @@ nav a {
     border-radius: 12px;
     max-width: 600px;
 
-    display: none;     
+    display: none;
     opacity: 0;
     text-align: center;
 }
@@ -187,10 +194,10 @@ nav a {
     opacity: 1;
 }
 
-#stackContent{
+#stackContent {
     display: flex;
     flex-wrap: wrap;
-    gap:12px;
+    gap: 12px;
     justify-content: center;
     text-align: center;
 }
@@ -228,7 +235,7 @@ nav a {
     display: none;
     opacity: 0;
     text-align: center;
-    border: 1px solid rgba(56,189,248,0.2);
+    border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .project-box.show {
@@ -241,9 +248,9 @@ nav a {
     line-height: 1.7;
     opacity: 0.9;
 
-    max-width: 650px;     
-    margin: 0 auto;       
-    text-align: center;   
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 
