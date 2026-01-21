@@ -1,67 +1,58 @@
-# Quick Reference Card for Interns
+# Quick Reference for Interns
 
-## File Structure (Always Follow This)
+## Two Organization Patterns
 
+### Pattern 1: Folder-Based ✨ (For 3+ projects)
 ```
-✅ CORRECT:
-your-name/
-├── index.html       (don't touch)
-├── project1.html
-├── project1.css
-├── project1.js
-├── project2.html
-├── project2.css
-└── project2.js
+✅ your-name/
+   ├── portfolio/
+   │   └── index.html      ← MUST be index.html
+   ├── todoapp/
+   │   └── index.html      ← MUST be index.html
+   └── calculator/
+       └── index.html      ← MUST be index.html
+```
+**⚠️ Each folder needs index.html (not todo.html or portfolio.html)**
 
-❌ WRONG:
-your-name/
-├── project1/
-│   ├── index.html
-│   └── style.css
-└── project2/
-    └── index.html
+### Pattern 2: Flat Files 📄 (For 2-3 projects)
+```
+✅ your-name/
+   ├── profile.html
+   ├── todo.html
+   └── calculator.html
 ```
 
----
-
-## Checklist Before Pushing
-
-- [ ] All files in root folder (no subfolders)
-- [ ] Filenames match links (`style.css` file → `href="style.css"`)
-- [ ] Used relative paths (no `/` at start)
-- [ ] Tested in browser (double-click HTML file)
-- [ ] No errors in console (press F12)
+**Pick ONE** - don't mix them!
 
 ---
 
-## Common Errors & Quick Fixes
+## Golden Rules
 
-| Error | Cause | Fix |
-|-------|-------|-----|
-| CSS not loading | Filename mismatch | Rename file OR fix link |
-| Broken after deploy | Absolute paths (`/style.css`) | Use relative (`style.css`) |
-| Wrong folder structure | Created subfolder | Move files to root, delete folder |
-
----
-
-## Template for New Project
-
+✅ **Use relative paths**
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Project</title>
-    <link rel="stylesheet" href="myproject.css">
-</head>
-<body>
+<link href="style.css">        <!-- Good -->
+<link href="/style.css">       <!-- Bad -->
+```
 
-    <!-- Your code here -->
+✅ **Match filenames exactly**
+```
+File: style.css → Link: href="style.css"
+```
 
-    <script src="myproject.js"></script>
-</body>
-</html>
+✅ **Don't edit index.html** (auto-generated)
+
+❌ **Don't mix patterns** (folders + flat files)
+
+---
+
+## Quick Test
+
+```bash
+# Open in browser
+open your-project/index.html
+
+# Check console (F12)
+# No errors = ready to push
 ```
 
 ---
@@ -70,8 +61,22 @@ your-name/
 
 ```bash
 git add .
-git commit -m "Add my new project"
+git commit -m "Add project"
 git push
 ```
 
-Then tell admin to deploy!
+---
+
+## Common Fixes
+
+| Problem | Fix |
+|---------|-----|
+| CSS not loading | Check filename matches link |
+| Images broken | Use relative paths |
+| Multiple projects messy | Use folder pattern |
+
+---
+
+## Need Help?
+
+Read: `INTERN_GUIDE.md` for full details

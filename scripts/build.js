@@ -5,12 +5,31 @@ const ROOT = path.resolve(__dirname, '..');
 const INTERNS_DIR = path.join(ROOT, 'interns');
 const PUBLIC = path.join(ROOT, 'public');
 
-function getProjects() {
+function getInterns() {
     if (!fs.existsSync(INTERNS_DIR)) return [];
     return fs.readdirSync(INTERNS_DIR).filter(name => {
         const fullPath = path.join(INTERNS_DIR, name);
         return fs.statSync(fullPath).isDirectory() && !name.startsWith('.');
     });
+}
+
+function analyzeInternStructure(internPath) {
+    const items = fs.readdirSync(internPath);
+    const folders = items.filter(item => {
+        const itemPath = path.join(internPath, item);
+        return fs.statSync(itemPath).isDirectory() && !item.startsWith('.');
+    });
+
+    const htmlFiles = items.filter(item =>
+        item.endsWith('.html') && item !== 'index.html'
+    );
+
+    return {
+        hasFolders: folders.length > 0,
+        hasLooseFiles: htmlFiles.length > 0,
+        folders: folders.map(name => ({ name, path: path.join(internPath, name) })),
+        htmlFiles
+    };
 }
 
 function copyFolder(src, dest) {
@@ -26,9 +45,141 @@ function copyFolder(src, dest) {
     }
 }
 
-function generateIndex(projects) {
-    const cards = projects.map((name, i) => {
-        const displayName = name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+function formatName(slug) {
+    return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+
+function generateInternLandingPage(internName, projects, isFolderBased) {
+    const displayName = formatName(internName);
+
+    const projectCards = projects.map((project, i) => {
+        const projectDisplayName = formatName(project.name.replace('.html', ''));
+        const id = String(i + 1).padStart(2, '0');
+        const href = isFolderBased ? `${project.name}/` : project.name;
+
+        return `
+            <a href="${href}" class="project-card">
+                <div class="project-number">[ PROJECT ${id} ]</div>
+                <h2 class="project-title">${projectDisplayName}</h2>
+                <p class="project-desc">View project</p>
+                <div class="arrow">→</div>
+            </a>`;
+    }).join('\n');
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${displayName} - Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan: #00e5ff;
+            --cyan-dim: rgba(0, 229, 255, 0.3);
+            --bg-dark: #0a1628;
+            --bg-card: #0d1f35;
+        }
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            background: var(--bg-dark);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container { max-width: 600px; text-align: center; }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px var(--cyan);
+        }
+        .subtitle {
+            opacity: 0.6;
+            letter-spacing: 0.3em;
+            font-size: 0.8rem;
+            margin-bottom: 3rem;
+        }
+        .projects { display: grid; gap: 1.5rem; }
+        .project-card {
+            background: var(--bg-card);
+            border: 2px solid var(--cyan-dim);
+            border-radius: 8px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--cyan);
+            display: block;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--cyan);
+            transition: left 0.3s;
+        }
+        .project-card:hover::before { left: 100%; }
+        .project-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+        }
+        .project-number {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            letter-spacing: 0.2em;
+        }
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
+        }
+        .project-desc {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+        .arrow { margin-top: 1rem; font-size: 1.5rem; }
+        .back-home {
+            margin-top: 3rem;
+            opacity: 0.5;
+        }
+        .back-home a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+        }
+        .back-home a:hover { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>${displayName.toUpperCase()}</h1>
+        <p class="subtitle">PROJECT PORTFOLIO</p>
+        <div class="projects">
+            ${projectCards}
+        </div>
+        <div class="back-home">
+            <a href="/">← BACK TO ALL INTERNS</a>
+        </div>
+    </div>
+</body>
+</html>`;
+}
+
+function generateMainIndex(interns) {
+    const cards = interns.map((name, i) => {
+        const displayName = formatName(name);
         const avatarUrl = `https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${name}&backgroundColor=0a1628`;
         const id = String(i + 1).padStart(2, '0');
         return `
@@ -88,7 +239,6 @@ function generateIndex(projects) {
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
             --cyan: #00e5ff;
             --cyan-dim: rgba(0, 229, 255, 0.3);
@@ -96,18 +246,14 @@ function generateIndex(projects) {
             --bg-dark: #0a1628;
             --bg-card: #0d1f35;
         }
-
         body {
             font-family: 'Share Tech Mono', monospace;
             min-height: 100vh;
             background: var(--bg-dark);
-            background-image:
-                radial-gradient(ellipse at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 50%);
+            background-image: radial-gradient(ellipse at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 50%);
             color: var(--cyan);
             overflow-x: hidden;
         }
-
-        /* Grid Background */
         .bg-grid {
             position: fixed;
             inset: 0;
@@ -118,39 +264,17 @@ function generateIndex(projects) {
             opacity: 0.3;
             pointer-events: none;
         }
-
-        /* Header */
-        header {
-            padding: 2.5rem 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .header-frame {
-            display: inline-block;
-            position: relative;
-            padding: 1rem 3rem;
-        }
-
-        .header-frame::before,
-        .header-frame::after {
+        header { padding: 2.5rem 2rem; text-align: center; position: relative; }
+        .header-frame { display: inline-block; position: relative; padding: 1rem 3rem; }
+        .header-frame::before, .header-frame::after {
             content: '';
             position: absolute;
             width: 20px;
             height: 20px;
             border: 2px solid var(--cyan);
         }
-
-        .header-frame::before {
-            top: 0; left: 0;
-            border-right: none; border-bottom: none;
-        }
-
-        .header-frame::after {
-            bottom: 0; right: 0;
-            border-left: none; border-top: none;
-        }
-
+        .header-frame::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .header-frame::after { bottom: 0; right: 0; border-left: none; border-top: none; }
         .logo {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(1.8rem, 5vw, 2.8rem);
@@ -158,307 +282,87 @@ function generateIndex(projects) {
             letter-spacing: 0.2em;
             text-shadow: 0 0 30px var(--cyan), 0 0 60px rgba(0,229,255,0.3);
         }
-
-        .subtitle {
-            font-size: 0.8rem;
-            letter-spacing: 0.5em;
-            opacity: 0.6;
-            margin-top: 0.5rem;
-        }
-
+        .subtitle { font-size: 0.8rem; letter-spacing: 0.5em; opacity: 0.6; margin-top: 0.5rem; }
         .header-line {
             width: 200px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--cyan), transparent);
             margin: 1.5rem auto 0;
         }
-
-        /* Main Grid */
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 1rem 2rem 3rem;
-        }
-
+        main { max-width: 1100px; margin: 0 auto; padding: 1rem 2rem 3rem; }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 1.5rem;
         }
-
-        /* Card */
-        .card {
-            position: relative;
-            text-decoration: none;
-            color: var(--cyan);
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.03);
-        }
-
-        .card-frame {
-            position: relative;
-            height: 140px;
-        }
-
-        .frame-svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .frame-path {
-            fill: var(--bg-card);
-            stroke: var(--cyan-dim);
-            stroke-width: 1.5;
-            transition: all 0.3s;
-        }
-
-        .card:hover .frame-path {
-            stroke: var(--cyan);
-            filter: drop-shadow(0 0 8px var(--cyan));
-        }
-
-        .corner-accent {
-            fill: none;
-            stroke: var(--cyan);
-            stroke-width: 2;
-            opacity: 0.8;
-        }
-
-        .card:hover .corner-accent {
-            opacity: 1;
-            filter: drop-shadow(0 0 4px var(--cyan));
-        }
-
-        /* Card Content */
-        .card-content {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            padding: 0 1.5rem;
-            gap: 1rem;
-        }
-
-        /* Hexagon Avatar */
-        .avatar-hex {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            flex-shrink: 0;
-        }
-
-        .hex-frame {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .hex-border {
-            fill: none;
-            stroke: var(--cyan-dim);
-            stroke-width: 2;
-            transition: all 0.3s;
-        }
-
-        .card:hover .hex-border {
-            stroke: var(--cyan);
-            filter: drop-shadow(0 0 6px var(--cyan));
-        }
-
-        .hex-inner {
-            fill: var(--bg-dark);
-            stroke: none;
-        }
-
+        .card { position: relative; text-decoration: none; color: var(--cyan); display: block; transition: transform 0.3s ease; }
+        .card:hover { transform: scale(1.03); }
+        .card-frame { position: relative; height: 140px; }
+        .frame-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .frame-path { fill: var(--bg-card); stroke: var(--cyan-dim); stroke-width: 1.5; transition: all 0.3s; }
+        .card:hover .frame-path { stroke: var(--cyan); filter: drop-shadow(0 0 8px var(--cyan)); }
+        .corner-accent { fill: none; stroke: var(--cyan); stroke-width: 2; opacity: 0.8; }
+        .card:hover .corner-accent { opacity: 1; filter: drop-shadow(0 0 4px var(--cyan)); }
+        .card-content { position: absolute; inset: 0; display: flex; align-items: center; padding: 0 1.5rem; gap: 1rem; }
+        .avatar-hex { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+        .hex-frame { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .hex-border { fill: none; stroke: var(--cyan-dim); stroke-width: 2; transition: all 0.3s; }
+        .card:hover .hex-border { stroke: var(--cyan); filter: drop-shadow(0 0 6px var(--cyan)); }
+        .hex-inner { fill: var(--bg-dark); stroke: none; }
         .avatar {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 55px;
-            height: 55px;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 55px; height: 55px;
             clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
         }
-
         .avatar-glow {
-            position: absolute;
-            inset: 10px;
+            position: absolute; inset: 10px;
             background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            opacity: 0; transition: opacity 0.3s;
         }
-
-        .card:hover .avatar-glow {
-            opacity: 1;
-        }
-
-        /* Info */
-        .info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .id-tag {
-            font-size: 0.7rem;
-            opacity: 0.6;
-            margin-bottom: 0.25rem;
-        }
-
-        .bracket {
-            color: var(--cyan);
-        }
-
+        .card:hover .avatar-glow { opacity: 1; }
+        .info { flex: 1; min-width: 0; }
+        .id-tag { font-size: 0.7rem; opacity: 0.6; margin-bottom: 0.25rem; }
+        .bracket { color: var(--cyan); }
         .info h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700;
+            letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
             text-shadow: 0 0 10px var(--cyan-glow);
         }
-
-        .status-line {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-
-        .status-icon {
-            width: 14px;
-            height: 14px;
-            fill: none;
-            stroke: var(--cyan);
-            stroke-width: 2;
-        }
-
-        .status-icon circle {
-            fill: #00ff88;
-            stroke: none;
-        }
-
-        .pulse {
-            width: 6px;
-            height: 6px;
-            background: #00ff88;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
+        .status-line { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7; }
+        .status-icon { width: 14px; height: 14px; fill: none; stroke: var(--cyan); stroke-width: 2; }
+        .status-icon circle { fill: #00ff88; stroke: none; }
+        .pulse { width: 6px; height: 6px; background: #00ff88; border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse {
             0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,136,0.7); }
             50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,136,0); }
         }
-
-        /* Arrow */
         .arrow-container {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--cyan-dim);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 40px; height: 40px; border: 1px solid var(--cyan-dim);
+            display: flex; align-items: center; justify-content: center;
             clip-path: polygon(15% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%, 0% 15%);
-            transition: all 0.3s;
-            flex-shrink: 0;
+            transition: all 0.3s; flex-shrink: 0;
         }
-
-        .card:hover .arrow-container {
-            border-color: var(--cyan);
-            background: var(--cyan);
-            box-shadow: 0 0 20px var(--cyan);
-        }
-
+        .card:hover .arrow-container { border-color: var(--cyan); background: var(--cyan); box-shadow: 0 0 20px var(--cyan); }
         .arrow {
-            width: 20px;
-            height: 20px;
-            fill: none;
-            stroke: var(--cyan);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: stroke 0.3s;
+            width: 20px; height: 20px; fill: none; stroke: var(--cyan); stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s;
         }
-
-        .card:hover .arrow {
-            stroke: var(--bg-dark);
-        }
-
-        /* Scan Line */
+        .card:hover .arrow { stroke: var(--bg-dark); }
         .scan-line {
-            position: absolute;
-            left: 20px;
-            right: 20px;
-            height: 1px;
-            background: var(--cyan);
-            opacity: 0;
-            top: 0;
-            box-shadow: 0 0 10px var(--cyan);
+            position: absolute; left: 20px; right: 20px; height: 1px; background: var(--cyan);
+            opacity: 0; top: 0; box-shadow: 0 0 10px var(--cyan);
         }
-
-        .card:hover .scan-line {
-            opacity: 1;
-            animation: scan 1.2s ease-in-out infinite;
-        }
-
-        @keyframes scan {
-            0% { top: 0; }
-            100% { top: 140px; }
-        }
-
-        /* Empty State */
-        .empty {
-            text-align: center;
-            padding: 4rem;
-            opacity: 0.4;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.2em;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.75rem;
-            opacity: 0.4;
-            letter-spacing: 0.3em;
-        }
-
-        .footer-line {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-line::before,
-        .footer-line::after {
-            content: '';
-            width: 50px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--cyan-dim));
-        }
-
-        .footer-line::after {
-            background: linear-gradient(90deg, var(--cyan-dim), transparent);
-        }
+        .card:hover .scan-line { opacity: 1; animation: scan 1.2s ease-in-out infinite; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 140px; } }
+        .empty { text-align: center; padding: 4rem; opacity: 0.4; font-family: 'Orbitron', sans-serif; letter-spacing: 0.2em; }
+        footer { text-align: center; padding: 2rem; font-size: 0.75rem; opacity: 0.4; letter-spacing: 0.3em; }
+        .footer-line { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 0.5rem; }
+        .footer-line::before, .footer-line::after { content: ''; width: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan-dim)); }
+        .footer-line::after { background: linear-gradient(90deg, var(--cyan-dim), transparent); }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
-
     <header>
         <div class="header-frame">
             <h1 class="logo">INTERN HQ</h1>
@@ -466,36 +370,61 @@ function generateIndex(projects) {
         </div>
         <div class="header-line"></div>
     </header>
-
     <main>
         <div class="grid">
-            ${projects.length ? cards : '<p class="empty">[ NO OPERATIVES DETECTED ]</p>'}
+            ${interns.length ? cards : '<p class="empty">[ NO OPERATIVES DETECTED ]</p>'}
         </div>
     </main>
-
     <footer>
-        <div class="footer-line">
-            <span>◇</span>
-        </div>
-        SYS.ONLINE // ${projects.length} UNIT${projects.length !== 1 ? 'S' : ''} ACTIVE
+        <div class="footer-line"><span>◇</span></div>
+        SYS.ONLINE // ${interns.length} UNIT${interns.length !== 1 ? 'S' : ''} ACTIVE
     </footer>
 </body>
 </html>`;
 }
 
-// Main
+// Main execution
 console.log('Building...\n');
 
 if (fs.existsSync(PUBLIC)) fs.rmSync(PUBLIC, { recursive: true });
 fs.mkdirSync(PUBLIC);
 
-const projects = getProjects();
-console.log('Found:', projects.length ? projects.join(', ') : 'none');
+const interns = getInterns();
+console.log('Found:', interns.length ? interns.join(', ') : 'none');
 
-for (const name of projects) {
-    console.log(`  → ${name}/`);
-    copyFolder(path.join(INTERNS_DIR, name), path.join(PUBLIC, name));
+for (const internName of interns) {
+    console.log(`\n→ ${internName}/`);
+    const internPath = path.join(INTERNS_DIR, internName);
+    const structure = analyzeInternStructure(internPath);
+
+    if (structure.hasFolders) {
+        console.log(`  Mode: Folder-based (${structure.folders.length} folders)`);
+
+        for (const folder of structure.folders) {
+            const destPath = path.join(PUBLIC, internName, folder.name);
+            console.log(`    ✓ ${folder.name}/`);
+            copyFolder(folder.path, destPath);
+        }
+
+        const projects = structure.folders.map(f => ({ name: f.name }));
+        const landingPage = generateInternLandingPage(internName, projects, true);
+        fs.writeFileSync(path.join(PUBLIC, internName, 'index.html'), landingPage);
+        console.log(`    ✓ index.html (landing page)`);
+
+    } else if (structure.hasLooseFiles) {
+        console.log(`  Mode: Flat files (${structure.htmlFiles.length} pages)`);
+
+        copyFolder(internPath, path.join(PUBLIC, internName));
+
+        const projects = structure.htmlFiles.map(f => ({ name: f }));
+        const landingPage = generateInternLandingPage(internName, projects, false);
+        fs.writeFileSync(path.join(PUBLIC, internName, 'index.html'), landingPage);
+        console.log(`    ✓ Copied all files + landing page`);
+
+    } else {
+        console.log(`  No projects found`);
+    }
 }
 
-fs.writeFileSync(path.join(PUBLIC, 'index.html'), generateIndex(projects));
-console.log(`\nDone! ${projects.length} project(s)`);
+fs.writeFileSync(path.join(PUBLIC, 'index.html'), generateMainIndex(interns));
+console.log(`\n✅ Done! ${interns.length} intern(s)`);
