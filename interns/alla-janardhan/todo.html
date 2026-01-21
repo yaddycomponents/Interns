@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project 1: Todo CRUD App</title>
-    <script src = "todo-script.js" defer></script>
     <style>
       :root {
-        /* Color Palette */
+        /* Color Palette */ 
         --color-primary: #667eea;
         --color-primary-dark: #5568d3;
         --color-secondary: #764ba2;
@@ -51,12 +50,14 @@
       }
 
       body.dark-mode {
+        /* Dark Mode Color Palette */
         --color-primary: #7c3aed;
         --color-primary-dark: #6d28d9;
         --color-secondary: #9333ea;
         --color-danger: #ef4444;
         --color-danger-dark: #dc2626;
 
+        /* Dark Mode Neutral Colors */
         --color-white: #1f2937;
         --color-bg-light: #374151;
         --color-bg-lighter: #4b5563;
@@ -270,7 +271,7 @@
       >
         🌙
       </button>
-      <h1>📝 Todo List.</h1>
+      <h1>📝 Todo List</h1>
 
       <form id="todo-form">
         <input
@@ -283,14 +284,25 @@
       </form>
 
       <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
-        <button class="filter-btn" data-filter="active" onclick="setFilter('active')">Active</button>
-        <button class="filter-btn" data-filter="completed" onclick="setFilter('completed')">Completed</button>
+        <button class="filter-btn all" data-filter="all">All</button>
+        <button class="filter-btn active" data-filter="active">Active</button>
+        <button class="filter-btn completed" data-filter="completed">Completed</button>
       </div>
+
+      <!-- <div class="filter-buttons">
+        <a href="?filter=all" class="filter-btn" data-filter="all">All</a>
+        <a href="?filter=active" class="filter-btn" data-filter="active"
+          >Active</a
+        >
+        <a href="?filter=completed" class="filter-btn" data-filter="completed"
+          >Completed</a
+        >
+      </div> -->
 
       <ul id="todo-list">
         <!-- Todos will be rendered here by JavaScript -->
       </ul>
     </div>
+    <script src="todo.js"></script>
   </body>
 </html>
