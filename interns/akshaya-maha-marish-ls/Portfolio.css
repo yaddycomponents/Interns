@@ -1,0 +1,211 @@
+*{
+    margin: 0;
+    padding:0;
+}
+
+html{
+    width:100%;
+}
+
+body{
+   background-image: url('https://images2.alphacoders.com/140/thumb-1920-1400251.png');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+   background-attachment: fixed;
+   width: 100%;
+    height: 100%;
+}
+
+body.bright-mode{
+    background-image: url("https://4kwallpapers.com/images/wallpapers/shin-chan-shinchan-nohara-shiro-tv-series-3840x2160-6865.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+   background-attachment: fixed;
+   width: 100%;
+    height: 100%;    
+}
+
+img{
+    border-radius: 50%;
+    width:350px;
+    height:350px;
+}
+
+.himg{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.simg{
+    border-radius: 0%;
+    height:50px;
+    width:50px;
+}
+
+.sm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav{
+    position:fixed;
+    top:15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255,0.4);
+    backdrop-filter:blur(5px);
+}
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0%;
+}
+
+.nav-left img {
+    width: 30px;
+    height: 30px;
+}
+
+.nav-left span {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.nav a,.nav span,.nav img{
+    color: black;
+    font-weight: 800;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.hbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+    padding:20px;
+}
+
+.one{
+    display: flex;
+    gap: 10px;
+    padding: 30px;
+    width:80px;    
+}
+
+.two{
+    display: flex;
+    gap: 10px;
+    padding: 30px;
+    width:80px;
+}
+
+.three{
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    width:80px;
+}
+
+.four{
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    width:80px;
+}
+
+.five{
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    width:80px;
+}
+
+button{
+    border-radius: 10px;
+    border-color: transparent;
+    width:auto;
+    padding:10px 20px;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255,0.4);
+    backdrop-filter:blur(5px);
+}
+
+.section{
+    width: 90%;
+    
+    color: aliceblue;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    margin: 100px auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255,0.4);
+    backdrop-filter:blur(5px);
+    margin-bottom: 200px;
+
+}
+
+h2{
+    font-size: 35px;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+p{
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: black;
+    padding: 30px;
+
+
+}
+
+.cpara{
+    font-size: 25px;
+    line-height: 40px;
+}
+
+
+
+.theme-toggle{
+    width:fit-content;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255,0.4);
+    backdrop-filter:blur(5px);
+    border-radius: 50%;
+}
+
+
+h3{
+    font-size: 30px;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-color: black;
+    margin-bottom: 10px;
+}
+
+
+.project{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
