@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* list-style: none; */
+}
+/* Video wrapper */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Video itself */
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* IMPORTANT */
+}
+
+header{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position : fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap:3rem;
+    background-color: white;
+    backdrop-filter: blur(1000px);
+    color: black;
+    padding: 1.3rem;
+    border-radius: 3rem;
+    height: 40px;
+    z-index: 10000;
+}
+.logo{
+    text-decoration: none;
+    font-family: sans-serif;
+    color: black;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-wrap: nowrap;
+    transition: 0.3 ease-in-out;
+}
+.logo:hover{
+    transform: scale(1.1);
+} 
+
+.nav-links{
+    display: flex;
+    gap: 2rem;
+
+}
+li a{
+    text-decoration: none;
+    font-family: sans-serif;
+    position: relative;
+    color: black;
+   
+    font-weight: 400;
+}
+li a::before{
+    position: absolute;
+    content: "";
+    width: 0;
+    left: 0;
+    height: 5px;
+    top:25px;
+    border-radius: 1rem;
+    transition: 0.3s ease-in-out;
+    background:  linear-gradient(90deg, #7802ff, hsl(237, 100%, 32%));
+}
+
+li a:hover::before{
+    width: 100%;
+}
+
+#menu-icon{
+    font-size: 2rem;
+    display: none;
+}
+
+#about {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+}
+section{
+    gap : 3rem;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;       /* vertical center */
+    justify-content: center;   /* horizontal center */
+    text-align: center;
+    font-family: system-ui, sans-serif;
+
+}
+.hero-image img {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.about-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+
+}
+.info-box {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+}
+.info-box span{
+    background:  linear-gradient(90deg, #7802ff, hsl(237, 100%, 32%));
+    border-radius: 20px;
+    /* background-clip: text;
+    color :transparent; */
+}
+.btn-group{
+    display: flex;
+    gap:2rem;
+    font-size: large    ;
+    font-weight: 10px;
+
+}
+.socials{
+    display: flex;
+    gap:2rem;
+
+}
+.socials i{
+    font-size: 40px;
+    color: white;
+
+}
+.socials .i:hover{
+    transform: scale(1.1);
+}
+.icons {
+  width: 36px;
+  height: 40px;
+}
+.icons:hover{
+    transform: scale(1.1);
+
+}
+
+.btn{
+    border-radius: 3rem;
+    border: 3px white;
+    font-weight: 700;
+    padding: 10px;
+    text-wrap: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.btn:hover{
+    background-color: white;
+    color: black;
+}
+
+
+
+/* achivements */
+
+.achievements {
+    min-height: 100vh;
+    padding: 5rem 2rem;
+    color: white;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.achievements-container {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 3rem auto;
+}
+.achievement-card {
+    display: flex;              /* make the card a flex container */
+    flex-direction: column;     /* stack multiple lines vertically */
+    justify-content: center;    /* center vertically */
+    align-items: center;        /* center horizontally */
+    text-align: center;         /* center text lines */
+    width: 300px;
+    height: 280px;
+    padding: 2rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    font-size: 30px;
+    font-family:sans-serif; 
+    font-weight: 600;
+    /* niceties for long text */
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.achievement-card:hover {
+    transform: translateY(-10px);
+    background:  linear-gradient(90deg, #7802ff, hsl(237, 100%, 32%));
+}
+
+.achievement-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap : 2px;
+    opacity: 0;
+    pointer-events: none;   /* 🔑 THIS IS THE KEY */
+    transition: 0.4s ease;
+    z-index: 9999;
+}
+
+.overlay-content img {
+    width: 1000px;
+    height: 500px;
+    border-radius: 16px;
+    object-fit:contain;
+}
+.achievement-overlay.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+.overlay-text {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 30px;
+    text-align: center;
+
+}
+#overlay-desc{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 20px;
+}
+.back-btn {
+    font-family: sans-serif;
+    width: 80px;
+    height: 40px;
+    font-weight:bold;
+    border-radius: 20px;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background: none;
+    border: none;
+    color: black;
+    background-color: white;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+}

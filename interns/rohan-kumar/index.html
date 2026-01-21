@@ -1,54 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Subscription Card</title>
-<link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohan Kumar - Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cyan: #00e5ff;
+            --cyan-dim: rgba(0, 229, 255, 0.3);
+            --bg-dark: #0a1628;
+            --bg-card: #0d1f35;
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            background: var(--bg-dark);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px var(--cyan);
+        }
+
+        .subtitle {
+            opacity: 0.6;
+            letter-spacing: 0.3em;
+            font-size: 0.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .projects {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 2px solid var(--cyan-dim);
+            border-radius: 8px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--cyan);
+            display: block;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--cyan);
+            transition: left 0.3s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+        }
+
+        .project-number {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            letter-spacing: 0.2em;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .arrow {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>ROHAN KUMAR</h1>
+        <p class="subtitle">PROJECT PORTFOLIO</p>
 
-<div class="container">
-  <div class="card">
-    
-    <div class="card-top">
-      <h2>Join our community.</h2>
-      <h3>30-day, hassle-free money back guarantee.</h3>
-      <p>
-        Gain access to our full library of tutorials along with expert code reviews.
-        Perfect for any developers who are serious about honing their skills.
-      </p>
-    </div>
-    
-    <div class="card-bottom">
-      
-      <div class="subscription">
-        <h4>Monthly Subscription.</h4>
-        <div class="price">
-          <span class="amount">$29</span>
-          <span class="period">per month</span>
+        <div class="projects">
+            <a href="subscription.html" class="project-card">
+                <div class="project-number">[ PROJECT 01 ]</div>
+                <h2 class="project-title">Subscription Card</h2>
+                <p class="project-desc">Community subscription pricing component</p>
+                <div class="arrow">→</div>
+            </a>
+
+            <a href="todo.html" class="project-card">
+                <div class="project-number">[ PROJECT 02 ]</div>
+                <h2 class="project-title">Todo CRUD App</h2>
+                <p class="project-desc">Task management system with create, read, update, delete operations</p>
+                <div class="arrow">→</div>
+            </a>
         </div>
-        <p>Full access for less than $1 a day</p>
-        <button>Sign Up</button>
-      </div>
-      
-      <div class="why-us">
-        <h4>Why Us</h4>
-        <ul>
-          <li>Tutorials by industry experts</li>
-          <li>Peer & expert code review</li>
-          <li>Coding exercises</li>
-          <li>Access to our GitHub repos</li>
-          <li>Community forum</li>
-          <li>Flashcard decks</li>
-          <li>New videos every week</li>
-        </ul>
-      </div>
-      
     </div>
-    
-  </div>
-</div>
-
 </body>
 </html>
