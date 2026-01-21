@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="Portfolio.css">
+    </head>
+
+    <body>
+        <div class="nav">
+            <div class="nav-left">
+                <img src="https://cdn-icons-png.flaticon.com/128/9128/9128900.png" style="width:30px;height: 30px;">
+                <span>Akshaya</span>
+            </div>
+            <div class="nav-right">
+                <a href="#section1" class="btn">Home</a>
+                <a href="#section2" class="btn">About</a>
+                <a href="#section3" class="btn">Project</a>
+                <a href="#section5" class="btn">Contact</a>
+                <button class="theme-toggle"id="theme-toggle">☀️</button>
+            </div>
+            
+        </div>
+
+
+        <div class="section one" id="section1">
+            <div class="himg">
+                <img src="home.jpeg" alt="image">
+            </div>
+
+            <div class="hbox">
+                <h2>Hello I'm Akshaya</h2>
+                <p>A passionate web developer focused on building clean, responsive, and user-friendly web applications.I enjoy turning ideas into interactive digital experiences using modern web technologies.Always eager to learn, improve, and create meaningful solutions through code.</p>
+                <button id="emailButton">Say Hello!</button>
+            </div>     
+        </div>
+        
+        <div class="section two" id="section2">
+            <div class="himg">
+                    <img src="home.jpeg" alt="image">
+            </div>
+
+            <div class="abox">
+                <h2>About Me </h2>
+                <p>I am a web developer who enjoys creating simple and functional websites.I like learning new technologies and improving my coding skills.I focus on writing clean code and building user-friendly designs.</p>
+                <button onclick="downloadpdf()">Download CV</button>
+            </div>
+        </div>
+
+        <div class="section three" id="section3">
+            <div class="project">
+                <h3>Accident Response Alerter</h3>
+                <p>Built a software solution to manage workshop scheduling, service logs, and inventory tracking efficiently</p>
+                <button onclick="openpdf('https://drive.google.com/file/d/1yhfMSHzJfWYt5TVPkF0FhvUlFlCBc9i1/view?usp=sharing')">Read More</button>
+                <h3>Automotive Service Management</h3>
+                <p>Built a software solution to manage workshop scheduling, service logs, and inventory tracking efficiently.</p>
+                <button onclick="openpdf('https://drive.google.com/file/d/1qqUpwVE_Far_OXkBDi7qt-HF1BVa6nu5/view?usp=sharing')">Read More</button>
+                
+            </div>
+        </div>
+
+        <div class="section five" id="section5">
+            
+            <div class="Contact">
+                <h2>Reach Me Through!</h2>
+                <p class="cpara">
+                    📞 
+                    Phone : 8270747004<br>📧 Gmail : akshaya.marish@growfin.ai<br>📍 Address : XXX, YYY, ZZZ
+                </p>
+                <div class="sm">
+                    <a href="https://www.instagram.com/akshh_ls?igsh=Mzkwb3p5MGZzOXVr"> <img class="simg" src="https://cdn-icons-png.flaticon.com/128/174/174855.png" style="width:42px;height:42px"></a>
+                    <a href="https://www.linkedin.com/in/akshaya-maha-marish-lingaraj-suresh-93b02a256?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <img class="simg" src="https://cdn-icons-png.flaticon.com/128/3536/3536505.png" style="width:42px;height:42px"></a> 
+                </div>
+            </div>
+        </div>
+        <script src="Portfolio.js"></script>
+    </body>
+</html>
