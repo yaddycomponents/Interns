@@ -16,6 +16,8 @@ function writeTodos(todosVar) {
   const todosHTML = todosVar.map(
     (item) =>
       `<li class="${item.completed ? "completed" : ""}"><input type='checkbox' onclick="checkItem(${item.id})"/><span>${item.text}<span> <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button><button class = "edit" onclick = "editItem(${item.id}">Edit</button>`,
+    console.log("hii"),
+    console.log(todosVar)
   );
   console.log(todosHTML);
   todoList.innerHTML = todosHTML;
