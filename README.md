@@ -2,41 +2,43 @@
 
 ## For Interns
 
-📖 **[READ THE FULL GUIDE](INTERN_GUIDE.md)** - Everything you need to know
+📖 **[READ THE FULL GUIDE](INTERN_GUIDE.md)** - Complete instructions
 
 🚀 **[QUICK REFERENCE](QUICK_REFERENCE.md)** - Keep this open while coding
 
-### Basic Rules
+### Two Ways to Organize
 
-1. **All files go in your root folder** (no subfolders!)
-   ```
-   interns/your-name/
-   ├── index.html        ← Don't touch (we manage this)
-   ├── profile.html      ← Your projects
-   ├── todo.html
-   ├── style.css
-   └── script.js
-   ```
+**Choose what works for you:**
 
-2. **Match filenames to links**
-   ```html
-   ✅ File: style.css → Link: <link href="style.css">
-   ❌ File: style.css → Link: <link href="main.css">
-   ```
+**Folder-Based** (3+ projects):
+```
+your-name/
+├── portfolio/
+├── todoapp/
+└── calculator/
+```
+→ Clean URLs: `site.com/your-name/portfolio/`
 
-3. **Use relative paths** (no `/` at the start)
-   ```html
-   ✅ <link href="style.css">
-   ❌ <link href="/style.css">
-   ```
+**Flat Files** (2-3 projects):
+```
+your-name/
+├── profile.html
+├── todo.html
+└── calculator.html
+```
+→ Simple URLs: `site.com/your-name/profile.html`
 
-### Push Your Changes
+### Golden Rules
+
+1. ✅ **Use relative paths** (`href="style.css"` not `/style.css`)
+2. ✅ **Match filenames exactly** (file: `style.css` → link: `style.css`)
+3. ✅ **Pick ONE pattern** - don't mix folders + flat files
+4. ❌ **Don't edit index.html** in your root (auto-generated)
+
+### Push Changes
 
 ```bash
-git pull
-git add .
-git commit -m "Update my project"
-git push
+git pull && git add . && git commit -m "Update" && git push
 ```
 
 Then ask admin to deploy!
@@ -45,19 +47,34 @@ Then ask admin to deploy!
 
 ## For Admin
 
-### Auto-Discovery System
+### Smart Build System
 
-Any folder inside `interns/` is automatically detected and deployed.
+The build script automatically detects each intern's pattern:
 
 ```
-interns/
-├── akshaya-maha-marish-ls/    → yoursite.vercel.app/akshaya-maha-marish-ls/
-├── alla-janardhan/            → yoursite.vercel.app/alla-janardhan/
-├── jaiakaash/                 → yoursite.vercel.app/jaiakaash/
-└── new-intern/                → yoursite.vercel.app/new-intern/
+→ jaiakaash/
+  Mode: Folder-based (3 folders)    ← Has subfolders
+    ✓ portfolio/
+    ✓ todoapp/
+    ✓ simpleproject/
+
+→ rohan-kumar/
+  Mode: Flat files (3 pages)        ← Has HTML files
+    ✓ subscription.html
+    ✓ todo.html
+    ✓ portfolio.html
 ```
 
-### Local Testing
+### How It Works
+
+1. **Scans each intern folder**
+2. **Detects pattern:**
+   - Has subfolders → Folder-based routing
+   - Has .html files → Flat file routing
+3. **Generates landing page** listing all projects
+4. **Deploys everything** to Vercel
+
+### Commands
 
 ```bash
 npm run build   # Build all projects
@@ -66,21 +83,31 @@ npm run dev     # Build + serve locally
 
 ### Deploy
 
-**Actions → Deploy to Vercel → Run workflow → production**
+**Actions → Deploy to Vercel → Run workflow → Choose environment**
 
-### When Interns Add New Projects
+### Adding New Interns
 
-1. Intern creates new HTML file (e.g., `calculator.html`)
-2. Update their `index.html` landing page to include new project link
-3. Deploy
+1. Create folder: `interns/new-intern-name/`
+2. They add their projects (folders or files)
+3. Deploy - everything auto-detected!
 
-### Common Fixes
+### URL Structure
 
-| Issue | Fix |
-|-------|-----|
-| Subfolder created | Move files to root, delete subfolder |
-| CSS not loading | Check filename matches link |
-| Wrong paths | Use relative paths only |
+```
+Main site:
+  yoursite.vercel.app/                    → Main HQ dashboard
+
+Intern landing:
+  yoursite.vercel.app/jaiakaash/          → Auto-generated landing
+
+Projects (folder-based):
+  yoursite.vercel.app/jaiakaash/portfolio/
+  yoursite.vercel.app/jaiakaash/todoapp/
+
+Projects (flat files):
+  yoursite.vercel.app/rohan/profile.html
+  yoursite.vercel.app/rohan/todo.html
+```
 
 ---
 
@@ -88,21 +115,33 @@ npm run dev     # Build + serve locally
 
 ```
 Interns/
-├── README.md              # This file
-├── INTERN_GUIDE.md        # Comprehensive intern guide
-├── QUICK_REFERENCE.md     # Quick reference card
+├── README.md                    # This file
+├── INTERN_GUIDE.md              # Full intern guide
+├── QUICK_REFERENCE.md           # Quick cheat sheet
 ├── package.json
 ├── vercel.json
 ├── scripts/
-│   └── build.js          # Auto-aggregation script
-├── .github/
-│   └── workflows/
-│       └── deploy.yml    # Manual deploy workflow
-└── interns/              # All intern folders
-    ├── intern-name/
-    │   ├── index.html    # Landing page (admin manages)
-    │   ├── project1.html
-    │   ├── project2.html
-    │   └── ...
+│   └── build.js                 # Smart build script
+├── .github/workflows/
+│   └── deploy.yml               # Manual deploy workflow
+└── interns/
+    ├── jaiakaash/               # Folder-based pattern
+    │   ├── portfolio/
+    │   ├── todoapp/
+    │   └── simpleproject/
+    ├── rohan-kumar/             # Flat file pattern
+    │   ├── profile.html
+    │   ├── todo.html
+    │   └── portfolio.html
     └── ...
 ```
+
+---
+
+## Key Features
+
+✨ **Auto-detection** - Supports both folder & flat patterns
+✨ **Auto-generated landing pages** - Lists all projects
+✨ **Manual deploys only** - Cost control via GitHub Actions
+✨ **HUD-themed UI** - Futuristic cyan design
+✨ **Flexible** - Interns choose their own organization
