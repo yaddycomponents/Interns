@@ -6,13 +6,13 @@ const todoForm = document.getElementById("todo-form");
 const todoInput = document.getElementById("todo-input");
 const todoList = document.getElementById("todo-list");
 
-function saveTodos(){
-    localStorage.setItem("todos" , JSON.stringify(todos));
+function saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-function loadTodos(){
+function loadTodos() {
     const saved = localStorage.getItem("todos");
-    if(saved){
+    if (saved) {
         todos = JSON.parse(saved);
     }
 }
@@ -26,7 +26,7 @@ function writeTodos() {
 
     const todosHTML = filteredTodos.map(
         (item) =>
-            `<li class="${item.completed ? "completed" : ""}"><input type='checkbox' onclick="checkItem(${item.id})"/><span>${item.text}<span> <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>`,
+            `<li class="${item.completed ? "completed" : ""}"><input type='checkbox' onclick="checkItem(${item.id})"/><span>${item.text}<span><button class = "filter-btn" onclick="editItem(${item.id})">Edit</button> <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>`,
     );
     todoList.innerHTML = todosHTML;
 }
