@@ -1,0 +1,322 @@
+
+#homePage {
+    height: 100vh;
+}
+
+body {
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Aleo', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+    background-color: lightgray;
+}
+
+.uup {
+    flex: 1;
+}
+
+.name a {
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background: #964B00;
+    background: linear-gradient(263deg, rgba(150, 75, 0, 1) 0%, rgba(233, 217, 201, 1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.half {
+    flex: 1;
+}
+
+
+.upper {
+    display: flex;
+    justify-content: center;
+    background-color: #472a15;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.middle {
+    background-image: url('https://plus.unsplash.com/premium_photo-1669842336797-4dfc03afa025?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnJvd258ZW58MHx8MHx8fDA%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    color: white;
+    padding: 20px;
+}
+
+
+.lower {
+    display: flex;
+    padding: 50px;
+    gap: 10px;
+}
+
+
+
+.Logo {
+    display: flex;
+    gap: 10px;
+
+}
+
+.llp {
+    flex: 1;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.expTab {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 50px;
+}
+
+.Tab {
+    background: #DDC4AC;
+    background: linear-gradient(90deg, rgba(221, 196, 172, 1) 0%, rgba(166, 89, 7, 1) 0%, rgba(186, 128, 68, 1) 100%, rgba(190, 135, 79, 1) 100%, rgba(185, 125, 64, 1) 100%);
+    width: 150px;
+    border-radius: 15px;
+    border-color: #472a15;
+    height: 80px;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+
+
+}
+
+.Logo.Img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #a53dff;
+}
+
+.Tabs {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.Tabs a {
+    text-decoration: none;
+    color: white;
+
+}
+
+.Logo.Name {
+    margin: 0 auto;
+
+}
+
+.profilePic {
+    display: flex;
+    justify-items: end;
+    height: 400px;
+
+}
+
+img {
+    position: relative;
+    left: 100px;
+    width: 500px;
+    border-radius: 30px;
+    box-shadow: 5px 5px 15px #888888;
+}
+
+a:hover {
+    color: lightgray;
+    font-size: 18px;
+
+
+}
+
+.greetings {
+    gap: 1rem;
+
+}
+
+.chat {
+    background-color: #a53dff;
+    color: white;
+    border-color: #a53dff;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px #888888;
+}
+
+.description {
+    padding-left: 10px;
+
+}
+
+.shortIntro {
+    width: 700px;
+}
+.homeIcon {
+    width: 40px;
+    height: 40px;
+
+}
+
+.msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #472a15;
+    width: 250px;
+    height: 50px;
+}
+
+.msg a {
+    display: flex;
+    align-items: center
+;
+    text-decoration: none;
+    color: white;
+
+}
+
+/* section 2 */
+.socialMedia {
+    display: flex;
+    justify-content: last baseline;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+.linkedin {
+    width: 50px;
+    height: 50px;
+}
+
+.Github {
+    width: 50px;
+    height: 50px;
+}
+
+.Email {
+    width: 50px;
+    height: 50px;
+}
+
+.profiledesc {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    height: 700px;
+}
+
+.desc {
+    background: #DDC4AC;
+    background: linear-gradient(90deg, rgba(221, 196, 172, 1) 0%, rgba(166, 89, 7, 1) 0%, rgba(186, 128, 68, 1) 100%, rgba(190, 135, 79, 1) 100%, rgba(185, 125, 64, 1) 100%);
+    width: 300px;
+    border-radius: 35px;
+    height: 600px;
+    display: flex;
+    color: white;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #888888;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.desc h2 {
+    text-align: center;
+}
+.desc:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+#about {
+    background: #964B00;
+    background: linear-gradient(263deg, rgba(150, 75, 0, 1) 0%, rgba(233, 217, 201, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 50px;
+}
+
+.projects {
+    background-image: url('https://img.freepik.com/free-photo/bulb-sign-idea-symbol-word_53876-123840.jpg?semt=ais_hybrid&w=740&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    color: white;
+    padding: 20px;
+}
+
+.Publications {
+    background-image: url('https://media.istockphoto.com/id/638059282/photo/research.jpg?s=612x612&w=0&k=20&c=sqFtKHae39emrEcXlQ_34F4u-wGqOvIuTEbpDNhMdSs=');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    color: white;
+    padding: 20px;
+}
+.Education {
+    background-image: url('https://img.freepik.com/free-photo/education-day-arrangement-table-with-copy-space_23-2148721266.jpg?semt=ais_hybrid&w=740&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    color: white;
+    padding: 20px;
+}
+
+.footer {
+    background-color: #472a15;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.socialMedia {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.socialMedia a {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.socialMedia a:hover {
+    transform: translateY(-5px);
+    opacity: 0.8;
+}
+
+.socialMedia img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.copyright {
+    color: white;
+    font-size: 14px;
+    margin: 0;
+}
