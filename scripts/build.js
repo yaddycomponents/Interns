@@ -104,7 +104,7 @@ function generateInternLandingPage(internName, projects, isFolderBased) {
             font-size: 0.8rem;
             margin-bottom: 3rem;
         }
-        .projects { display: grid; gap: 1.5rem; }
+        .projects { display: grid; grid-template-columns: 400px; gap: 1.5rem; justify-content: center; }
         .project-card {
             background: var(--bg-card);
             border: 2px solid var(--cyan-dim);
