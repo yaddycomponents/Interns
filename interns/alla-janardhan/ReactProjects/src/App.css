@@ -1,0 +1,173 @@
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg, #6f7bd9, #7a86e5);
+}
+
+#root {
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+
+.title {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.Main {
+  background: #1b1b1b;
+  border-radius: 18px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.Building-title {
+  margin: 0;
+  font-size: 28px;
+  color: white;
+}
+
+.ButtonOn {
+  margin-top: 10px;
+  padding: 14px 30px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: lawngreen;
+  color: black;
+}
+
+.ButtonOff {
+  margin-top: 10px;
+  padding: 14px 30px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: red;
+  color: white;
+}
+
+
+.Buildings {
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  gap: 24px;
+}
+
+
+.Building {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.Building h1 {
+  margin: 0;
+  background: black;
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.Power {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  color: green;
+}
+
+
+.Floor {
+  background: #f3f4f6;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.Floor h1 {
+  margin: 0;
+  background: gray;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.MeterOn {
+  background: #22c55e;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.MeterOff {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.Room {
+  background: blue;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Room p {
+  margin: 0;
+  font-weight: 500;
+  gap: 100px;
+}
+
+.Buttton {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: lawngreen;
+  color: black;
+}
