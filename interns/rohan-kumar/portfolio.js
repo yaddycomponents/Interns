@@ -31,9 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const resumeBtn = document.getElementById("download-resume");
 
     if (resumeBtn) {
-        resumeBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-
+        resumeBtn.addEventListener("click", function () {
+            
             const link = document.createElement("a");
             link.href = "resume.pdf";
             link.download = "Rohan_Kumar_Resume.pdf";

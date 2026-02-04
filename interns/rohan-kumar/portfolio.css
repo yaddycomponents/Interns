@@ -49,7 +49,7 @@ body {
 .container {
     width: 90%;
     max-width: 1200px;
-    margin: auto;
+    margin : auto;
 }
 
 .navbar {
@@ -446,19 +446,4 @@ body.dark .footer-bottom {
 .footer-bottom p {
     font-size: 13px;
     color: var(--muted-text);
-}
-
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-html {
-    scroll-behavior: smooth;
 }
