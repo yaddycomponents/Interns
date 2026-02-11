@@ -13,13 +13,12 @@ function App() {
       <BrowserRouter>
         <Layout style={{ minHeight: '100vh' }}>
 
-          {/* ✅ Header owns its own Layout.Header */}
           <Header />
 
           <Layout.Content>
             <Container>
               <Routes>
-                <Route path="/" element={<Navigate to="/tasks" />} />
+                <Route path="/" element={<Navigate to="/dashboard" />} />
                 <Route path="/tasks" element={<TasksPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/tasks/:id" element={<TaskDetails />} />
